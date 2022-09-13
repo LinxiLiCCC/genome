@@ -1,0 +1,26 @@
+x0=np.linspace(60,100,401)
+random_sum1=df['similarity']
+t1=78.82413
+t2=93.65461
+sd1=7.542843
+sd2=3.259184
+cutoffs=[]
+sum_probability=[]
+for k in range(len(x0)):
+    cutoff1 = (x0)[k]
+    probability_pdf1=[]
+    probability_pdf2=[]
+    cutoffs=cutoffs+[cutoff1]
+    for i in range(len(random_sum1)):
+        if random_sum1[i]<cutoff1:
+            probability_pdf1=probability_pdf1+[norm.pdf(random_sum1[i],loc=t1,scale=sd1)]
+        elif cutoff1<random_sum1[i]:
+            probability_pdf2=probability_pdf2+[norm.pdf(random_sum1[i],loc=t2,scale=sd2)]
+    probability_pdf=sum(np.log(probability_pdf1+probability_pdf2))
+    sum_probability=sum_probability+[probability_pdf]
+loglike=sum_probability
+maxElement = np.max(loglike)
+maximum_position=np.where(loglike == maxElement)
+#print(maximum_position[0][0])
+number_position=(x0)[maximum_position[0][0]]
+print(maxElement,maximum_position,number_position)
