@@ -1,4 +1,4 @@
-x0=np.linspace(60,100,401)
+x0=np.linspace(50,100,501)
 random_sum1=df['similarity']
 t1=78.82413
 t2=93.65461
